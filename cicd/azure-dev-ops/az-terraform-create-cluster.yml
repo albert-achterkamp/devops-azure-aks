@@ -5,7 +5,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
+#variables:
 #  TF_LOG: $(TERRAFORM_LOGLEVEL)
 
 stages:
