@@ -74,6 +74,9 @@ Login with kubectl config
 - https://azure.microsoft.com/pt-br/pricing/details/virtual-machines/series/
 - https://docs.microsoft.com/pt-br/azure/virtual-machines/sizes-general
 - https://azure.microsoft.com/pt-br/blog/new-av2-series-vm-sizes/
+- Terraform examples
+  - https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-tf-and-aks
+  - https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-aks-applicationgateway-ingress
 
 **Terraform**
 
