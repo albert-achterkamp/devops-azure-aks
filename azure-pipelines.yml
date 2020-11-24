@@ -1,3 +1,4 @@
+# Azure Pipeline that deploys the whole infrastructure continuously, using Terraform
 trigger:
 - none
 
@@ -15,6 +16,11 @@ stages:
   - job: 'prepare'
     displayName: 'prepare'
     steps:
+    - task: Cache@2
+      displayName: 'Register TF cache'
+      inputs:
+        key: terraform | $(Agent.OS) | "$(Build.BuildNumber)" | $(Build.SourceVersion) | $(tfComponent) | "$(tfVarFileName)"
+        path: $(tfExecutionDir)
     - task: TerraformInstaller@0
       inputs:
         terraformVersion: $(terraformVersion)
