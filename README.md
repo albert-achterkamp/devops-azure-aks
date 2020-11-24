@@ -3,11 +3,12 @@
 Requirements:
 
 - The Azure Account created
-- The Service Principal set up
-- Set the variables (used security variables to make the repo be cleaner) to be used across the commands (used in the github actions)
+- The Service Principal set up and Initial state in place. 
+  - Using as dependency the repository https://github.com/timoteosoutello/devops-azure-initial-terraform-state for this step
+- Set the variables to make the repo be cleaner
   - For Azure CLI
     - AZURE_CREDENTIALS
-  - For Terraform CLI
+  - For Terraform CLI (used in CI/CD Tools)
     - For authentication
       - AZURE_CLIENT_ID
       - AZURE_CLIENT_SECRET
@@ -17,18 +18,27 @@ Requirements:
       - RESOURCE_GROUP_NAME
       - STORAGE_ACCOUNT_NAME
       - STORAGE_CONTAINER_NAME
-- Initial state - resources must exists before. Using as dependency the repository https://github.com/timoteosoutello/devops-azure-initial-terraform-state
 
 ## CI/CD
 
-Using Github actions, it was created the following YML files:
+Using **Github actions** (.github/workflows/) or **Azure DevOps** (cicd/azure-dev-ops) it was created the following YML files:
 
-- az-terraform-create-cluster.yml
-  - The Terraform State:
-    - ![](documentation\images\state.png)
-  - The Cluster:
-    - ![](documentation\images\k8s.png)
-- az-terraform-destroy-cluster.yml
+- The az-terraform-create-cluster.yml - For resources creation
+  - After the creation, result would be like below
+    - The Terraform State:
+      - ![](documentation\images\state.png)
+    - The Cluster:
+      - ![](documentation\images\k8s.png)
+- The az-terraform-destroy-cluster.yml  - For resources destruction
+
+### CI/CD Troubleshoot
+
+Common errors:
+
+- Error building ARM Config: obtain subscription() from Azure CLI: Error parsing json result from the Azure CLI: Error waiting for the Azure CLI: exit status 1
+  - **Solution:** Ensure that you passed the correct AZURE variables as mentioned above
+- A task is missing. The pipeline references a task called 'TerraformInstaller'. This usually indicates the task isn't installed, and you may be able to install it from the Marketplace: https://marketplace.visualstudio.com. (Task version 0, job 'prepare', step ''.)
+  - **Solution**: Install the [terraform extension](https://dev.azure.com/tsoutello/test/_build/results?buildId=11&view=logs&j=cebb7365-f209-590e-ea23-03f1fba8144c&t=b876e2e3-4bf8-5afc-1e94-654150d48086&l=12) for your Azure Dev Ops account.
 
 ## Configure kubectl
 
