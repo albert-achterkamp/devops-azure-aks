@@ -27,9 +27,11 @@ stages:
     - task: TerraformInstaller@0
       inputs:
         terraformVersion: $(TERRAFORM_VERSION)
-    - script: |
-        terraform init -backend-config="resource_group_name=$(RESOURCE_GROUP_NAME)" -backend-config="storage_account_name=$(STORAGE_ACCOUNT_NAME)" -backend-config="container_name=$(STORAGE_CONTAINER_NAME)"
-        terraform plan
-      workingDirectory: $(system.defaultWorkingDirectory)/terraform
-      failOnStderr: true
-      displayName: 'terraform validate'
+    - task: TerraformTaskV1@0
+      displayName: "Run > terraform init"
+      inputs:
+        command: "init"
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+        backendAzureRmResourceGroupName: '$(RESOURCE_GROUP_NAME)'
+        backendAzureRmStorageAccountName: '$(STORAGE_ACCOUNT_NAME)}'
+        backendAzureRmContainerName: '$(STORAGE_CONTAINER_NAME)'
