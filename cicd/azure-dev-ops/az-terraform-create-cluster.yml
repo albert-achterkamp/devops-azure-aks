@@ -28,9 +28,7 @@ stages:
       inputs:
         terraformVersion: $(TERRAFORM_VERSION)
     - script: |
-        echo "ARM_TENANT_ID -> $(ARM_TENANT_ID)"
-        az ad signed-in-user show
-        terraform init -backend-config="resource_group_name=${RESOURCE_GROUP_NAME}" -backend-config="storage_account_name=${STORAGE_ACCOUNT_NAME}" -backend-config="container_name=${STORAGE_CONTAINER_NAME}"
+        terraform init -backend-config="resource_group_name=$(RESOURCE_GROUP_NAME)" -backend-config="storage_account_name=$(STORAGE_ACCOUNT_NAME)" -backend-config="container_name=$(STORAGE_CONTAINER_NAME)"
         terraform plan
       workingDirectory: $(system.defaultWorkingDirectory)/terraform
       failOnStderr: true
