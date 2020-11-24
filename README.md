@@ -1,4 +1,4 @@
-# DevOPS - Initial State - Terraform/Azure
+# DevOPS - Azure AKS Cluster via Terraform (using Github Actions / Azure DevOps)
 
 Requirements:
 
