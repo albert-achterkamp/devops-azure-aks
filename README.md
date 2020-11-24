@@ -77,6 +77,8 @@ Login with kubectl config
 - Terraform examples
   - https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-tf-and-aks
   - https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-aks-applicationgateway-ingress
+- Azure DevOps
+  - https://github.com/microsoft/azure-pipelines-extensions/tree/master/Extensions/Terraform/Src/Tasks/TerraformTaskV1
 
 **Terraform**
 
@@ -88,3 +90,5 @@ Login with kubectl config
 **External references**
 
 - https://build5nines.com/terraform-create-an-aks-cluster/
+- https://itnext.io/infrastructure-as-code-iac-with-terraform-azure-devops-f8cd022a3341
+- https://itnext.io/managing-azure-rbac-roles-and-assignments-with-terraform-1a1cdb2f8eb6
