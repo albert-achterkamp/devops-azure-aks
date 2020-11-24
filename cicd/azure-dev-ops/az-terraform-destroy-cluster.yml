@@ -1,0 +1,28 @@
+trigger:
+- none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: 'destroy'
+  displayName: 'destroy'
+  jobs:
+  - job: 'destroy'
+    displayName: 'destroy'
+    steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: $(TERRAFORM_VERSION)
+    - script: |
+        terraform --version
+        terraform init -backend-config="resource_group_name=$(RESOURCE_GROUP_NAME)" -backend-config="storage_account_name=$(STORAGE_ACCOUNT_NAME)" -backend-config="container_name=$(STORAGE_CONTAINER_NAME)"
+        terraform destroy -auto-approve
+      workingDirectory: $(system.defaultWorkingDirectory)/terraform
+      failOnStderr: true
+      displayName: 'terraform destroy'
+      env:
+          ARM_TENANT_ID: $(AZURE_TENANT_ID)
+          ARM_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+          ARM_CLIENT_ID: $(AZURE_CLIENT_ID)
+          ARM_CLIENT_SECRET: $(AZURE_CLIENT_SECRET)
