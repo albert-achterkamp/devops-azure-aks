@@ -6,7 +6,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  terraformVersion: ${TERRAFORM_VERSION}
   ARM_CLIENT_ID: ${AZURE_CLIENT_ID}
   ARM_CLIENT_SECRET: ${AZURE_CLIENT_SECRET}
   ARM_SUBSCRIPTION_ID: ${AZURE_SUBSCRIPTION_ID}
@@ -26,7 +25,7 @@ stages:
         path: $(tfExecutionDir)
     - task: TerraformInstaller@0
       inputs:
-        terraformVersion: $(terraformVersion)
+        terraformVersion: $(TERRAFORM_VERSION)
     - script: |
         terraform init -backend-config="resource_group_name=${RESOURCE_GROUP_NAME}" -backend-config="storage_account_name=${STORAGE_ACCOUNT_NAME}" -backend-config="container_name=${STORAGE_CONTAINER_NAME}"
         terraform plan
