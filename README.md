@@ -26,9 +26,9 @@ Using **Github actions** (.github/workflows/) or **Azure DevOps** (cicd/azure-de
 - The az-terraform-create-cluster.yml - For resources creation
   - After the creation, result would be like below
     - The Terraform State:
-      - ![](documentation\images\state.png)
+      - ![](documentation/images/state.png)
     - The Cluster:
-      - ![](documentation\images\k8s.png)
+      - ![](documentation/images/k8s.png)
 - The az-terraform-destroy-cluster.yml  - For resources destruction
 
 ### CI/CD Troubleshoot
@@ -72,7 +72,7 @@ You should be able to access the Kubernetes dashboard at [http://127.0.0.1:8001/
 
 Login with kubectl config
 
-![](documentation\images\aks_kube_config_login.png)
+![](documentation/images/aks_kube_config_login.png)
 
 # References
 
