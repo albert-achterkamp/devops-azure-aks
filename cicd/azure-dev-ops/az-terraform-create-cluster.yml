@@ -1,4 +1,3 @@
-# Azure Pipeline that deploys the whole infrastructure continuously, using Terraform
 trigger:
 - none
 
