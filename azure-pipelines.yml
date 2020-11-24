@@ -1,0 +1,42 @@
+trigger:
+- none
+
+pool:
+  vmImage: 'ubuntu-latest'
+  name: aks-create
+
+variables:
+  terraformVersion: 0.13.5
+
+parameters:
+  - name: ARM_CLIENT_ID
+    type: string
+  - name: ARM_CLIENT_SECRET
+    type: string
+  - name: ARM_SUBSCRIPTION_ID
+    type: string
+  - name: ARM_TENANT_ID
+    type: string
+  - name: RESOURCE_GROUP_NAME
+    type: string
+  - name: STORAGE_ACCOUNT_NAME
+    type: string
+  - name: STORAGE_CONTAINER_NAME
+    type: string
+
+stages:
+- stage: 'prepare'
+  displayName: 'prepare'
+  jobs:
+  - job: 'prepare'
+    displayName: 'prepare'
+    steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: $(terraformVersion)
+    - script: |
+        terraform init -backend-config="resource_group_name=${{parameters.RESOURCE_GROUP_NAME}}" -backend-config="storage_account_name=${{parameters.STORAGE_ACCOUNT_NAME}}" -backend-config="container_name=${{parameters.STORAGE_CONTAINER_NAME}}"
+        terraform plan
+      workingDirectory: $(system.defaultWorkingDirectory)/terraform
+      failOnStderr: true
+      displayName: 'terraform validate'
