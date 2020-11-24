@@ -4,7 +4,6 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-  name: aks-create
 
 variables:
   terraformVersion: 0.13.5
