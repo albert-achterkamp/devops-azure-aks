@@ -5,7 +5,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-#variables:
+variables:
 #  TF_LOG: $(TERRAFORM_LOGLEVEL)
 
 stages:
@@ -15,11 +15,6 @@ stages:
   - job: 'prepare'
     displayName: 'prepare'
     steps:
-    - task: Cache@2
-      displayName: 'Register TF cache'
-      inputs:
-        key: terraform | $(Agent.OS) | "$(Build.BuildNumber)" | $(Build.SourceVersion) | $(tfComponent) | "$(tfVarFileName)"
-        path: $(tfExecutionDir)
     - task: TerraformInstaller@0
       inputs:
         terraformVersion: $(TERRAFORM_VERSION)
